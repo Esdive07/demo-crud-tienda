@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -13,6 +15,7 @@ import lombok.Data;
 @Entity
 @Table(name = "productos")
 @Data
+@JsonInclude(Include.NON_NULL)
 public class ProductoEntity {
 
 	@Id
@@ -25,5 +28,5 @@ public class ProductoEntity {
 	private String tipoProducto;
 	@JsonProperty("descripcion")
 	private String descripcionProducto;
-	
+
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rah.demo.tienda.entity.CompraEntity;
+import com.rah.demo.tienda.model.CompraInventarioModel;
 import com.rah.demo.tienda.model.CompraModel;
 import com.rah.demo.tienda.model.PageModel;
 
@@ -29,5 +30,10 @@ public class CompraMapper {
 
 	public PageModel pageToModel(Page<CompraEntity> page) {
 		return this.objectMapper.convertValue(page, PageModel.class);
+	}
+
+	public CompraModel changeToModel(CompraInventarioModel compraInventarioModel) {
+		// TODO Auto-generated method stub
+		return this.objectMapper.convertValue(compraInventarioModel, CompraModel.class);
 	}
 }

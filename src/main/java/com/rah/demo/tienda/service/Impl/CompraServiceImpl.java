@@ -14,24 +14,26 @@ import com.rah.demo.tienda.model.CompraModel;
 import com.rah.demo.tienda.model.PageModel;
 import com.rah.demo.tienda.repository.CompraRepository;
 import com.rah.demo.tienda.service.CompraService;
+import com.rah.demo.tienda.util.MapperUtil;
 
 @Service
 public class CompraServiceImpl implements CompraService {
 
 	private CompraRepository compraRepository;
 	private CompraMapper compraMapper;
+	private MapperUtil mapperUtil;
 
-	public CompraServiceImpl(CompraRepository compraRepository, CompraMapper compraMapper) {
+	public CompraServiceImpl(CompraRepository compraRepository, MapperUtil mapperUtil) {
 		super();
 		this.compraRepository = compraRepository;
-		this.compraMapper = compraMapper;
+		this.mapperUtil = mapperUtil;
 	}
 
 	@Override
 	public CompraModel createCompra(CompraModel compraModel) {
-		CompraEntity compraEntity = this.compraMapper.ModelToEntity(compraModel);
+		CompraEntity compraEntity = this.mapperUtil.mapperObject(compraModel, CompraEntity.class);
 		CompraEntity compraSave = this.compraRepository.save(compraEntity);
-		return this.compraMapper.entityToModel(compraSave);
+		return this.mapperUtil.mapperObject(compraSave, CompraModel.class);
 	}
 
 	@Override

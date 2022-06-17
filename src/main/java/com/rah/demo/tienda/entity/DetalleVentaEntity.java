@@ -1,7 +1,5 @@
 package com.rah.demo.tienda.entity;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,20 +16,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Entity
-@Table(name = "compras")
+@Table(name = "detalleVentas")
 @Data
 @JsonInclude(Include.NON_NULL)
-public class CompraEntity {
+public class DetalleVentaEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty("id")
-	private Integer idCompra;
-	private float valorCompra;
+	private Integer idDetalle;
+	private float valorUnidad;
 	private Integer cantidad;
-	private Date fechaCompra;
 
 	@ManyToOne
-	@JoinColumn(name = "product_id", nullable = false)
+	@JoinColumn(name = "venta_id", nullable = false)
+	@JsonProperty("venta")
+	@JsonBackReference
+	private VentaEntity ventaEntity;
+
+	@ManyToOne
+	@JoinColumn(name = "producto_id")
 	@JsonProperty("producto")
 	private ProductoEntity productoEntity;
 }
