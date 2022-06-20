@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rah.demo.tienda.model.CompraInventarioModel;
 import com.rah.demo.tienda.model.CompraModel;
 import com.rah.demo.tienda.model.PageModel;
 import com.rah.demo.tienda.service.CompraService;
@@ -28,9 +29,16 @@ public class CompraController {
 		this.compraService = compraService;
 	}
 
+//	@PostMapping
+//	public ResponseEntity<CompraModel> createCompra(@RequestBody CompraModel compraModel) {
+//		return ResponseEntity.status(HttpStatus.CREATED).body(this.compraService.createCompra(compraModel));
+//	}
+
 	@PostMapping
-	public ResponseEntity<CompraModel> createCompra(@RequestBody CompraModel compraModel) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(this.compraService.createCompra(compraModel));
+	public ResponseEntity<CompraInventarioModel> createCompraInventario(
+			@RequestBody CompraInventarioModel compraInventarioModel) {
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(this.compraService.createCompraInvenetario(compraInventarioModel));
 	}
 
 	@GetMapping

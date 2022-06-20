@@ -21,10 +21,10 @@ import lombok.Data;
 @Data
 @JsonInclude(Include.NON_NULL)
 public class CompraEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty("id")
-	private Integer idCompra;
+	private Integer id;
 	private float valorCompra;
 	private Integer cantidad;
 	private Date fechaCompra;

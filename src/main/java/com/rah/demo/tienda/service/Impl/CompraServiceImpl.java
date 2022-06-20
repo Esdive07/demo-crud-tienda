@@ -10,22 +10,29 @@ import org.springframework.stereotype.Service;
 
 import com.rah.demo.tienda.entity.CompraEntity;
 import com.rah.demo.tienda.mapper.CompraMapper;
+import com.rah.demo.tienda.model.CompraInventarioModel;
 import com.rah.demo.tienda.model.CompraModel;
+import com.rah.demo.tienda.model.InventarioModel;
 import com.rah.demo.tienda.model.PageModel;
 import com.rah.demo.tienda.repository.CompraRepository;
 import com.rah.demo.tienda.service.CompraService;
+import com.rah.demo.tienda.service.InventarioService;
 import com.rah.demo.tienda.util.MapperUtil;
 
 @Service
 public class CompraServiceImpl implements CompraService {
 
 	private CompraRepository compraRepository;
+	private InventarioService inventarioService;
 	private CompraMapper compraMapper;
 	private MapperUtil mapperUtil;
 
-	public CompraServiceImpl(CompraRepository compraRepository, MapperUtil mapperUtil) {
+	public CompraServiceImpl(CompraRepository compraRepository, InventarioService inventarioService,
+			CompraMapper compraMapper, MapperUtil mapperUtil) {
 		super();
 		this.compraRepository = compraRepository;
+		this.inventarioService = inventarioService;
+		this.compraMapper = compraMapper;
 		this.mapperUtil = mapperUtil;
 	}
 
@@ -76,6 +83,16 @@ public class CompraServiceImpl implements CompraService {
 	public CompraModel getByIdCompra(Integer id) {
 		CompraEntity compraEntity = this.compraRepository.findById(id).get();
 		return this.compraMapper.entityToModel(compraEntity);
+	}
+
+	@Override
+	public CompraInventarioModel createCompraInvenetario(CompraInventarioModel compraInventarioModel) {
+		CompraModel compraModel = this.mapperUtil.mapperObject(compraInventarioModel, CompraModel.class);
+		compraModel = this.createCompra(compraModel);
+		InventarioModel inventarioModel = this.mapperUtil.mapperObject(compraInventarioModel, InventarioModel.class);
+		this.inventarioService.createInventario(inventarioModel);
+		compraInventarioModel.setId(compraModel.getId());
+		return compraInventarioModel;
 	}
 
 }

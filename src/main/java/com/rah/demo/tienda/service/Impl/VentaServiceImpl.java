@@ -26,12 +26,15 @@ public class VentaServiceImpl implements VentaService {
 
 	@Override
 	public VentaModel createVenta(VentaModel ventaModel) {
+
 		VentaEntity ventaEntity = this.ventaMapper.modelToEntity(ventaModel);
 
 		float totalVenta = 0;
 
 		for (DetalleVentaEntity detalleVenta : ventaEntity.getDetalleVentaEntities()) {
+
 			float subtotal = detalleVenta.getCantidad() * detalleVenta.getValorUnidad();
+
 			totalVenta += subtotal;
 		}
 

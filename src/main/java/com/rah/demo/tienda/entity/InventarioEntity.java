@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Entity
-@Table(name = "compras")
+@Table(name = "inventarios")
 @Data
 @JsonInclude(Include.NON_NULL)
 public class InventarioEntity {
@@ -30,7 +30,7 @@ public class InventarioEntity {
 	private Date fechaCreacion;
 	private Date fechaModificacion;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "product_id", nullable = false)
 	@JsonProperty("producto")
 	private ProductoEntity productoEntity;
