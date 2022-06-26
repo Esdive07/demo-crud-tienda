@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -33,5 +34,6 @@ public class InventarioEntity {
 	@OneToOne
 	@JoinColumn(name = "product_id", nullable = false)
 	@JsonProperty("producto")
+	@JsonBackReference
 	private ProductoEntity productoEntity;
 }

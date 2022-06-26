@@ -12,4 +12,6 @@ public class ProductoModel {
 	private String nombre;
 	private String tipo;
 	private String descripcion;
+
+	private InventarioModel inventario;
 }
